@@ -1,0 +1,68 @@
+version: '2'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ=Asia/Jerusalem
+    network_mode: host
+    volumes:
+      - <path to> media/plex/database:/config
+      - <path to> media/plex/transcode/temp:/transcode
+      - <path to> media/plex/data:/data
+
+
+  sonarr:
+    image: linuxserver/sonarr
+    container_name: sonarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    volumes:
+      - <path to> media/sonarr/data:/config
+      - <path to> media/sonarr/tvseries:/tv
+      - <path to> media/sonarr/downloadclient-downloads:/downloads
+    ports:
+      - 8989:8989
+    restart: unless-stopped
+    
+  radarr:
+    image: linuxserver/radarr
+    container_name: radarr
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    volumes:
+      - <path to> media/radarr/data:/config
+      - <path to> media/radarr/movies:/movies
+      - <path to> media/radarr/downloadclient-downloads:/downloads
+    ports:
+      - 7878:7878
+    restart: unless-stopped
+
+  netdata:
+    image: netdata/netdata
+    hostname: plex.manjaro # set to fqdn of host
+    ports:
+      - 80:19999
+    cap_add:
+      - SYS_PTRACE
+    security_opt:
+      - apparmor:unconfined
+    volumes:
+      - /proc:/host/proc:ro
+      - /sys:/host/sys:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+  
+  transmission:
+    restart: always
+    image: "dperson/transmission"
+    container_name: transmission
+    ports:
+      - 9091:9091
+    volumes:
+      - <path to> media/Torrent:/var/lib/transmission-daemon/downloads 
+
