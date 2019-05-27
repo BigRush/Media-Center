@@ -42,6 +42,20 @@ services:
     ports:
       - 7878:7878
     restart: unless-stopped
+    
+   jackett:
+    image: linuxserver/jackett
+    container_name: jackett
+    environment:
+      - PUID=1000
+      - PGID=1000
+      - TZ=Asia/Jerusalem
+    volumes:
+      - <path to> media/jackett/data:/config
+      - <path to> media/jackett/blackhole:/downloads
+    ports:
+      - 9117:9117
+    restart: unless-stopped
 
   netdata:
     image: netdata/netdata
