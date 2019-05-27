@@ -6,7 +6,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ=Asia/Jerusalem
-    network_mode: host
+    network_mode: host # Runs on port 32400
     volumes:
       - <path to> media/plex/database:/config
       - <path to> media/plex/transcode/temp:/transcode
@@ -45,6 +45,7 @@ services:
 
   netdata:
     image: netdata/netdata
+    container_name: netdata
     hostname: plex.manjaro # set to fqdn of host
     ports:
       - 80:19999
