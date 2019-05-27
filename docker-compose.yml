@@ -23,7 +23,7 @@ services:
     volumes:
       - <path to> media/sonarr/data:/config
       - <path to> media/sonarr/tvseries:/tv
-      - <path to> media/sonarr/downloadclient-downloads:/downloads
+      - <path to> media/torrent/downloadclient-downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -38,7 +38,7 @@ services:
     volumes:
       - <path to> media/radarr/data:/config
       - <path to> media/radarr/movies:/movies
-      - <path to> media/radarr/downloadclient-downloads:/downloads
+      - <path to> media/torrent/downloadclient-downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -57,6 +57,15 @@ services:
       - 9117:9117
     restart: unless-stopped
 
+  transmission:
+    restart: always
+    image: "dperson/transmission"
+    container_name: transmission
+    ports:
+      - 9091:9091
+    volumes:
+      - <path to> media/torrent/downloadclient-downloads:/var/lib/transmission-daemon/downloads 
+      
   netdata:
     image: netdata/netdata
     container_name: netdata
@@ -71,13 +80,5 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
-  
-  transmission:
-    restart: always
-    image: "dperson/transmission"
-    container_name: transmission
-    ports:
-      - 9091:9091
-    volumes:
-      - <path to> media/Torrent:/var/lib/transmission-daemon/downloads 
+ 
 
