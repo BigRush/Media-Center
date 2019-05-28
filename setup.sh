@@ -28,5 +28,6 @@ for i in $(grep $HOME docker-compose.yml |awk '{print $NF}' |cut -d ':' -f '1');
     fi
 done
 
-echo "Completed successfully. Persistent volumes have been created under $HOME/$media_dir. Have a nice day!"
+echo "Completed successfully. Persistent volumes have been created under:"
+echo "'$HOME/$media_dir'. Have a nice day!"
 
