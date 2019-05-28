@@ -20,7 +20,7 @@ if [[ $? -ne 0 ]]; then
     exit 1
 fi
 
-for i in $(grep $HOME tmp |awk '{print $NF}' |cut -d ':' -f '1'); do
+for i in $(grep $HOME docker-compose.yml |awk '{print $NF}' |cut -d ':' -f '1'); do
     mkdir -p $i 
     if [[ $? -ne 0 ]]; then
         echo "Failed to create directory '$i'... exiting..."
