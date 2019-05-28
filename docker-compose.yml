@@ -8,9 +8,9 @@ services:
       - TZ=Asia/Jerusalem
     network_mode: host # Runs on port 32400
     volumes:
-      - <path to> media/plex/database:/config
-      - <path to> media/plex/transcode/temp:/transcode
-      - <path to> media/plex/data:/data
+      - <path to>/plex/database:/config
+      - <path to>/plex/transcode/temp:/transcode
+      - <path to>/plex/data:/data
 
   sonarr:
     image: linuxserver/sonarr
@@ -20,9 +20,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - <path to> media/sonarr/data:/config
-      - <path to> media/sonarr/tvseries:/tv
-      - <path to> media/torrent/downloadclient-downloads:/downloads
+      - <path to>/sonarr/data:/config
+      - <path to>/sonarr/tvseries:/tv
+      - <path to>/torrent/downloadclient-downloads:/downloads
     ports:
       - 8989:8989
     restart: unless-stopped
@@ -35,9 +35,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - <path to> media/radarr/data:/config
-      - <path to> media/radarr/movies:/movies
-      - <path to> media/torrent/downloadclient-downloads:/downloads
+      - <path to>/radarr/data:/config
+      - <path to>/radarr/movies:/movies
+      - <path to>/torrent/downloadclient-downloads:/downloads
     ports:
       - 7878:7878
     restart: unless-stopped
@@ -50,9 +50,9 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - <path to> media/bazarr/config:/config
-      - <path to> media/radarr/movies:/movies
-      - <path to> media/sonarr/tvseries:/tv
+      - <path to>/bazarr/config:/config
+      - <path to>/radarr/movies:/movies
+      - <path to>/sonarr/tvseries:/tv
     ports:
       - 6767:6767
     restart: unless-stopped  
@@ -65,8 +65,8 @@ services:
       - PGID=1000
       - TZ=Asia/Jerusalem
     volumes:
-      - <path to> media/jackett/data:/config
-      - <path to> media/jackett/blackhole:/downloads
+      - <path to>/jackett/data:/config
+      - <path to>/jackett/blackhole:/downloads
     ports:
       - 9117:9117
     restart: unless-stopped
@@ -78,7 +78,7 @@ services:
     ports:
       - 9091:9091
     volumes:
-      - <path to> media/torrent/downloadclient-downloads:/var/lib/transmission-daemon/downloads 
+      - <path to>/torrent/downloadclient-downloads:/var/lib/transmission-daemon/downloads 
       
   netdata:
     image: netdata/netdata
