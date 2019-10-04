@@ -26,7 +26,7 @@ services:
     ports:
       - 8989:8989
     restart: unless-stopped
-    
+
   radarr:
     image: linuxserver/radarr
     container_name: radarr
@@ -55,8 +55,8 @@ services:
       - <path to>/sonarr/tvseries:/tv
     ports:
       - 6767:6767
-    restart: unless-stopped  
-   
+    restart: unless-stopped
+
   jackett:
     image: linuxserver/jackett
     container_name: jackett
@@ -78,8 +78,8 @@ services:
     ports:
       - 9091:9091
     volumes:
-      - <path to>/torrent/downloadclient-downloads:/var/lib/transmission-daemon/downloads 
-      
+      - <path to>/torrent/downloadclient-downloads:/var/lib/transmission-daemon
+
   netdata:
     image: netdata/netdata
     container_name: netdata
@@ -94,5 +94,3 @@ services:
       - /proc:/host/proc:ro
       - /sys:/host/sys:ro
       - /var/run/docker.sock:/var/run/docker.sock:ro
- 
-
